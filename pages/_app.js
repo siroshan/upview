@@ -24,19 +24,19 @@ const CartProvider = dynamic(() => import('../context/cartContext'), {
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-export default function App({ Component, pageProps, emotionCache }) {
+export default function App(props) {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
     <ViewportProvider>
       <CartProvider>
-        {/* <CacheProvider value={emotionCache}> */}
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <SiteLayout>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </SiteLayout>
-        </ThemeProvider>
-        {/* </CacheProvider> */}
+        <CacheProvider value={emotionCache}>
+          <ThemeProvider theme={theme}>
+            <SiteLayout>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </SiteLayout>
+          </ThemeProvider>
+        </CacheProvider>
       </CartProvider>
     </ViewportProvider>
   );

@@ -40,7 +40,9 @@ const NavBar = () => {
             height={25}
             borderRadius='50%'
             bgcolor='#d0312d'
-            p={1}
+            display='flex'
+            flexDirection='row'
+            justifyContent='center'
           >
             <Typography textAlign='center' color='#fff'>{items.length}</Typography>
           </Box>

@@ -1,10 +1,13 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useContext } from 'react';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { Button, Rating, Stack } from '@mui/material';
+import { CartContext } from '../../context/cartContext';
 
 const ProductCard = ({ product }) => {
+  const { addToCart } = useContext(CartContext);
+
   return (
     <Link
       href={`products/${product.id}`}
@@ -60,7 +63,11 @@ const ProductCard = ({ product }) => {
         <Rating name='read-only' value={product.rating} readOnly />(
         {product.ratedBy})
       </Stack>
-      <Button variant='outlined' color='primary'>
+      <Button
+        variant='outlined'
+        color='primary'
+        onClick={() => addToCart(product, 1)}
+      >
         Add to Cart
       </Button>
     </Link>
